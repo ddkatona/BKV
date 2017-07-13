@@ -1,5 +1,5 @@
 #!/bin/bash
 
 mkdir -p out/production/BKV
-javac -d out/production/BKV src/*.java src/network/*.java
-java -cp out/production/BKV Main
+javac -cp lib/json-simple-1.1.jar -d out/production/BKV src/*.java src/network/*.java
+java -cp lib/json-simple-1.1.jar:out/production/BKV Main
