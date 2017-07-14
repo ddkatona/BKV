@@ -7,10 +7,38 @@ package network;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
+import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import java.util.*;
 
 public class JsonDecoder {
+
+
+    public String findInJson(String json, String levels) {
+
+        String[] s = levels.split("\\.");
+        String level = "";
+
+        try {
+            JSONParser parser = new JSONParser();
+
+
+            JSONObject obj = (JSONObject) parser.parse(json);
+            level = obj.get(s[0]).toString();
+
+            for (int i = 1; i < s.length; i++) {
+                obj = (JSONObject) parser.parse(level);
+                level = obj.get(s[i]).toString();
+            }
+
+        } catch(Exception ex) {
+
+        } finally {
+            return level;
+        }
+
+
+    }
 
     public ArrayList<String> routesForStop(String json) {
 
@@ -45,6 +73,14 @@ public class JsonDecoder {
         } finally {
             return buses;
         }
+    }
+
+    public int arriveForStopAndRoute(String json, String route) {
+
+        String stopTimes = findInJson(json, "data.entry.stopTimes");
+        System.out.println(stopTimes);
+
+        return 0;
     }
 
 }

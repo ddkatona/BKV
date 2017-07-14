@@ -19,5 +19,10 @@ public class Main {
         for(String s : buses) {
             System.out.println(s);
         }
+
+
+
+        //System.out.println(jd.findInJson(json, "data.entry"));
+        jd.arriveForStopAndRoute(json, "990");
     }
 }
