@@ -1,6 +1,10 @@
+import entity.Route;
+import entity.StopTime;
+import entity.Trip;
 import network.JsonDecoder;
 import network.Request;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -9,20 +13,25 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
 
-        Request r = new Request();
-        String json = r.get();
-        JsonDecoder jd = new JsonDecoder();
+        while(true) {
+            Request r = new Request();
+            String json = r.get("BKK_F01323"); //F01323 Hungaria tram
+            JsonDecoder jd = new JsonDecoder();
 
-        ArrayList<String> buses = new ArrayList<>();
-        buses = jd.routesForStop(json);
+            ArrayList<Route> routes = jd.getRoutes(json);
+            ArrayList<Trip> trips = jd.getTrips(json, routes);
+            ArrayList<StopTime> times = jd.getStopTimes(json, trips);
 
-        for(String s : buses) {
-            System.out.println(s);
+            for (StopTime st : times) {
+                st.printLineTimeLeft_mmss();
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println();
         }
-
-
-
-        //System.out.println(jd.findInJson(json, "data.entry"));
-        jd.arriveForStopAndRoute(json, "990");
     }
 }

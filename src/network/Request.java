@@ -13,12 +13,12 @@ import java.net.URLConnection;
  */
 public class Request {
 
-    public String get() {
+    public String get(String stopId) {
 
         String result = "";
 
         try {
-            URL url = new URL("http://futar.bkk.hu/bkk-utvonaltervezo-api/ws/otp/api/where/arrivals-and-departures-for-stop.json?stopId=BKK_F00979");
+            URL url = new URL("http://futar.bkk.hu/bkk-utvonaltervezo-api/ws/otp/api/where/arrivals-and-departures-for-stop.json?stopId=" + stopId);
             URLConnection yc = null;
             yc = url.openConnection();
             BufferedReader in = new BufferedReader(
