@@ -11,6 +11,7 @@ import java.net.URLConnection;
 /**
  * Created by ddkatona on 2017.07.13..
  */
+
 public class Request {
 
     public String get(String stopId) {

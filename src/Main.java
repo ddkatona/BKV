@@ -1,3 +1,4 @@
+import client.Server;
 import entity.Route;
 import entity.StopTime;
 import entity.Trip;
@@ -11,7 +12,10 @@ import java.util.ArrayList;
  * Created by ddkatona on 2017.07.13..
  */
 public class Main {
+
     public static void main(String[] args) {
+
+        new Server().start();
 
         while(true) {
             Request r = new Request();
